@@ -128,21 +128,50 @@ void Car::displayTexture ()
    glFlush();
 
 }
-void Car::update ()
+void Car::update (GameObject *obstical,int size)
 {
-   collisions(); 
+   
+   for(int i=0;i<size;i++){
+      int xpos = obstical->getX();
+      int ypos = obstical->getY();
+      int width = obstical->getW();
+      int height = obstical->getH();
+      int cond = obstical->getC();
+
+      collisions(xpos, ypos, width, height, cond); 
+   }
 }
 
-void Car::collisions()
+void Car::collisions(int xpos, int ypos, int width, int height, int cond)
 {
    int quadrant = Game::getInstance().getArrayPos();
+/*
+   if(quadrant == 4){
+      if(m_x+5 > xpos && m_x < xpos + width && m_y < ypos && m_y > ypos - height){
+         stopright = true;
+      }else if(m_x > xpos && m_x-5 < xpos + width && m_y < ypos && m_y > ypos - height){
+         stopleft = true;
+      }else if(m_y+5 > ypos -height && m_y < ypos && m_x > xpos && m_x < xpos+width){
+         stopup = true;
+      }else if(m_y > ypos - height && m_y-5 < ypos && m_x > xpos && m_x < xpos+width){
+         stopdown = true;
+      }else{
+         stopright = false;
+         stopleft = false;
+         stopup = false;
+         stopdown = false;
+      }
+
+*/
+
+   }
 
    if(quadrant == 4){
       if(m_x > 115 &&m_x <140 && m_y >155 && m_y <357){
          stopright = true;
       }else if(m_x <325 && m_x > 300 && m_y >155 && m_y < 360){
          stopleft = true;
-      }else if(m_y > 150 && m_y < 175 && m_x < 320 && m_x >120){
+      }else if(m_y > 155 && m_y < 180 && m_x < 320 && m_x >120){
          stopup = true;
       }else if(m_y < 365 && m_y > 335 && m_x < 320 && m_x > 120){
          stopdown = true;
@@ -152,6 +181,10 @@ void Car::collisions()
          stopup = false;
          stopdown = false;
       }
+      
+      
+
+
       //if(m_x < 250 && m_x > 245&& m_y > 220 && m_y <320){
         // stopleft = true;
          //stopright = true;
