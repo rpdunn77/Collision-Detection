@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Jukebox.h"
+#include "Obstacle.h"
 #include <cstdio>
 #include <stdlib.h>
 #include <GL/glut.h>    /* glut.h includes gl.h and glu.h */
@@ -214,9 +215,6 @@ void Game::reshape(GLsizei newwidth, GLsizei newheight)
      glutPostRedisplay();
 }
 
-
-
-
 void Game::init() {
     // Set the seed for the random variable generator just in case we need it.
     srandom(time(NULL));
@@ -234,6 +232,15 @@ void Game::init() {
     glDepthFunc(GL_LESS);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+
+
+    m_gameObjects = 10;                            //x   y   len  bre
+    m_myGameObjects[m_gameObjects] = new Obstacles(174, 372, 147, 150); //square
+                                                    //x   y    r     n   s    e
+    m_myGameObjects[m_gameObjects] = new Obstacles;(730, 140, 8.5 , 8.5, 0 , 8.5 );  
+
+    
+
     //gluOrtho2D(0, m_width+m_margine, 0, m_height+m_margine);
     glOrtho(0, m_width+m_margine, 0, m_height+m_margine, 0, 1000);
 
