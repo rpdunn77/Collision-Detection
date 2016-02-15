@@ -80,7 +80,7 @@ void Player::down ()
   		if(m_y-5 <= 0)
   		{
       	if(Game::getInstance().getArrayPos() != 3 && Game::getInstance().getArrayPos() != 4){
-      		m_arraypos +=2;
+      		m_array+=2;
 	      	Game::getInstance().changeScreen(m_arraypos);
          	Game::getInstance().setArrayPos(m_arraypos);
 	      	m_y = 676;
