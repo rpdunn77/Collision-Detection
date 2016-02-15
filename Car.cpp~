@@ -15,13 +15,8 @@ class ImageLoader;
 void Car::left ()
 {
    if(!stopleft){
-   	if(Game::getInstance().getArrayPos() == 3 || Game::getInstance().getArrayPos() == 1){
-      	m_arraypos = Game::getInstance().getArrayPos() +1;
-   	}
-   	else{
-      	m_arraypos = Game::getInstance().getArrayPos() - 1;
-   	}
-      
+      m_arraypos = Game::getInstance().getArrayPos() - 1;
+    
    	if(m_x-5 <= 0)
    	{
       	if(Game::getInstance().getArrayPos() != 3 && Game::getInstance().getArrayPos() != 1){
@@ -191,52 +186,58 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond,int qua
       	stopright = false;
 		}else if(circledistancex <= (m_size/2)){
       	//m_speed = 0.5;
-      	if(m_direction == 0){
+      	if(c_up){
       				//stopup = true;
       				//stopdown = false;
       				//stopleft = false;
       				//stopright = false;
       				m_y -=4;
-      		}else if(m_direction == 1){
+      	}
+      	if(c_right){
       				//stopright = true;
       				//stopleft=false;
       				//stopup=false;
       				//stopdown=false;
       				m_x -=4;
-      		}else if(m_direction == 2){
+      	}
+      	if(c_down){
       				//stopdown = true;
       				//stopup=false;
       				//stopright=false;
       				//stopleft=false;
       				m_y +=4;
-      		}else if(m_direction == 3){
+      	}
+      	if(c_left){
       				//stopleft = true;
       				//stopright=false;
       				//stopup=false;
       				//stopdown=false;
       				m_x +=4;
-      		}
+      	}
 		}else if(circledistancey <= (m_size/2)){
 			//m_speed = 0.5;
-      	if(m_direction == 0){
+			if(c_up){
       				//stopup = true;
       				//stopdown = false;
       				//stopleft = false;
       				//stopright = false;
       				m_y -=4;
-      		}else if(m_direction == 1){
-      				stopright = true;
+      	}
+      	if(c_right){
+      				//stopright = true;
       				//stopleft=false;
       				//stopup=false;
       				//stopdown=false;
       				m_x -=4;
-      		}else if(m_direction == 2){
+      	}
+      	if(c_down){
       				//stopdown = true;
       				//stopup=false;
       				//stopright=false;
       				//stopleft=false;
       				m_y +=4;
-      		}else if(m_direction == 3){
+      	}
+      	if(c_left){
       				//stopleft = true;
       				//stopright=false;
       				//stopup=false;
@@ -273,7 +274,7 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond,int qua
       				//stopup=false;
       				//stopdown=false;
       				m_x +=4;
-      		}
+      	}
 		}
      
      
