@@ -1,12 +1,12 @@
-#ifndef CAR_H_
-#define CAR_H_
+#ifndef PLAYER_H_
+#define PLAYER_H_
 
 //#include "Jukebox.h"
 #include <GL/freeglut.h>
 #include "Obstacle.h"
 class Obstacle;
 
-class Car {  
+class Player {  
    private:
     int m_x;  
     int m_y; 
@@ -17,10 +17,10 @@ class Car {
     
     bool stopup,stopdown,stopright,stopleft;
 
-    GLuint m_carTexture;   
+    GLuint m_PlayerTexture;   
 
    public:
-    bool moveup, moveleft, movedown, moveright;
+    bool c_up, c_left, c_down, c_right;
     void left ();
     void right ();
     void up ();
@@ -32,7 +32,7 @@ class Car {
     void update (Obstacle *obstacle[],int size, int quad);
     void collisions(int xpos, int ypos, int width, int height, int cond, int quad);
     void init();
-    Car(int x = 500, int y = 500);
+    Player(int x = 500, int y = 500);
 };
 
-#endif /* CAR_H_ */
+#endif /* Player_H_ */

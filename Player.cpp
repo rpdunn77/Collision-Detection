@@ -1,4 +1,4 @@
-#include "Car.h"
+#include "Player.h"
 #include "Jukebox.h"
 #include <GL/glut.h>    /* glut.h includes gl.h and glu.h */
 #include <math.h>
@@ -12,7 +12,7 @@
 
 class ImageLoader;
 
-void Car::left ()
+void Player::left ()
 {
    if(!stopleft){
       m_arraypos = Game::getInstance().getArrayPos() - 1;
@@ -29,9 +29,9 @@ void Car::left ()
    	}
    }
    m_direction = 3;
-   m_carTexture= ImageLoader::LoadTexture( "./imgs/Left.bmp" );
+   m_PlayerTexture= ImageLoader::LoadTexture( "./imgs/Left.bmp" );
 }
-void Car::right ()
+void Player::right ()
 {
    if(!stopright){
       m_arraypos = Game::getInstance().getArrayPos() - 1;
@@ -48,9 +48,9 @@ void Car::right ()
    	}
    }
    m_direction = 1;
-   m_carTexture= ImageLoader::LoadTexture( "./imgs/Right.bmp" );
+   m_PlayerTexture= ImageLoader::LoadTexture( "./imgs/Right.bmp" );
 }
-void Car::up ()
+void Player::up ()
 {
    if(!stopup){
       m_arraypos = Game::getInstance().getArrayPos() - 2;
@@ -67,9 +67,9 @@ void Car::up ()
 		}
    }
    m_direction = 0;
-	m_carTexture= ImageLoader::LoadTexture( "./imgs/Up.bmp" );
+	m_PlayerTexture= ImageLoader::LoadTexture( "./imgs/Up.bmp" );
 }
-void Car::down ()
+void Player::down ()
 {
    if(!stopdown){
       m_arraypos = Game::getInstance().getArrayPos() - 2;
@@ -86,34 +86,34 @@ void Car::down ()
   		}
    }
 	m_direction = 2;
-  	m_carTexture= ImageLoader::LoadTexture( "./imgs/Down.bmp" );
+  	m_PlayerTexture= ImageLoader::LoadTexture( "./imgs/Down.bmp" );
 }
-void Car::attack ()
+void Player::attack ()
 {
   Game::getInstance().changeScreen(1);
 }
-void Car::honk ()
+void Player::honk ()
 {
   Jukebox::PlaySound("./sounds/AHH.WAV");
 }
 
-void Car::display ()
+void Player::display ()
 {
    displayTexture ();
 }
 
-void Car::displayTexture ()
+void Player::displayTexture ()
 {
-   // Draw the car
+   // Draw the Player
    glEnable(GL_TEXTURE_2D);
    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_REPLACE);
-   glBindTexture (GL_TEXTURE_2D, m_carTexture);
+   glBindTexture (GL_TEXTURE_2D, m_PlayerTexture);
    ImageLoader::rectangle(m_x,m_y, 50, 50);
    glDisable(GL_TEXTURE_2D);
    glFlush();
 
 }
-void Car::update (Obstacle *ob[],int size,int quad)
+void Player::update (Obstacle *ob[],int size,int quad)
 {
    for(int i=0;i<size;i++){
       int xpos = ob[i]->getX();
@@ -128,7 +128,7 @@ void Car::update (Obstacle *ob[],int size,int quad)
    }
 }
 
-void Car::collisions(int xpos, int ypos, int width, int height, int cond,int quad)
+void Player::collisions(int xpos, int ypos, int width, int height, int cond,int quad)
 {
 	int quadrant = Game::getInstance().getArrayPos();
 	if(quadrant == quad && height > 0){
@@ -205,13 +205,13 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond,int qua
 	}
 }
 
-void Car::init()
+void Player::init()
 {
-  m_carTexture= ImageLoader::LoadTexture( "./imgs/Up.bmp" );
+  m_PlayerTexture= ImageLoader::LoadTexture( "./imgs/Up.bmp" );
 }
 
 
-Car::Car(int x, int y)
+Player::Player(int x, int y)
 {
 	c_up=false;
 	c_down=false;

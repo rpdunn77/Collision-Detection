@@ -100,33 +100,6 @@ void Game::key(unsigned char key, int x, int y)
    keystates[key] = true;
    if (key == ' ')
       Game::c_running = !Game::c_running;
-   /*
-    switch (key)
-    {
-        case ' ' :
-            Game::c_running = !Game::c_running;
-            break;
-        case 'a' && 'w':
-            Game::getInstance().m_myCar.left();
-            break;
-        case 'd':
-            Game::getInstance().m_myCar.right();
-            break;
-        case 's':
-			Game::getInstance().m_myCar.down();
-			break;
-        case 'w':
-			Game::getInstance().m_myCar.up();
-            break;
-        case 'k':
-			Game::getInstance().m_myCar.attack();
-			break;
-		case 'r':
-			Game::getInstance().m_myCar.honk();
-			break;
-    }
-    */
-    //glutPostRedisplay();
 }
 
 void Game::splashScreen()
@@ -155,25 +128,7 @@ void Game::splashScreen()
    
    glDisable(GL_TEXTURE_2D);
    glFlush();
-   
-   
 
-
-/*
-   char string[1200];
-   sprintf(string, "\n\nGame Paused. Press space to continue.\n");
-   sprintf(string, "%s\n\n\nThis splash screen should tell you what each of the keys do.", string);
-   sprintf(string, "%s\nFor example: ", string);
-   sprintf(string, "%s\n    d= Turn Right ", string);
-   sprintf(string, "%s\n    a= Turn Left ", string);
-   sprintf(string, "%s\n    s= Honk Horn ", string);
-   sprintf(string, "%s\n    l= Accelerate ", string);
-   sprintf(string, "%s\n    k= Slow Down / Reverse ", string);
-   sprintf(string, "%s\n    j= Stop ", string);
-   glColor3f(0.0, 0.0, 0.0); // Black Text
-   ImageLoader::RenderString(30, m_height-60, GLUT_BITMAP_TIMES_ROMAN_24, string);
-   glDisable(GL_COLOR_MATERIAL);
-*/
 }
 
 void Game::changeScreen(int dir)
