@@ -61,14 +61,30 @@ void Game::run() {
 
 void Game::keyOperations()
 {
-   if(keystates['a'])
+   if(keystates['a']){
       Game::getInstance().m_myCar.left();
-   if(keystates['w'])
+      Game::getInstance().m_myCar.c_left = true;
+   }else{
+   	Game::getInstance().m_myCar.c_left = false;
+   }
+   if(keystates['w']){
       Game::getInstance().m_myCar.up();
-   if(keystates['d'])
+      Game::getInstance().m_myCar.c_up = true;
+   }else{
+   	Game::getInstance().m_myCar.c_up = false;
+   }
+   if(keystates['d']){
       Game::getInstance().m_myCar.right();
-   if(keystates['s'])
+      Game::getInstance().m_myCar.c_right = true;
+   }else{
+   	Game::getInstance().m_myCar.c_right = false;
+   }
+   if(keystates['s']){
       Game::getInstance().m_myCar.down();
+      Game::getInstance().m_myCar.c_down = true;
+   }else{
+   	Game::getInstance().m_myCar.c_down = false;
+   }
 
 }
 

@@ -175,17 +175,111 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond,int qua
 		float circledistancey = abs(ypos - (m_y + (m_size/2)));
 		float corner = pow((circledistancex - m_size/2),2) +
 							pow((circledistancey - m_size/2),2);
-		corner = sqrt(corner);
+		//float corner = pow(circledistancex,2) + pow(circledistancey,2);
+		//corner = sqrt(corner);
 		if(circledistancex > (m_size/2 + width)){	
-			m_speed = 1;
+			//m_speed = 1;
+			stopup = false;
+      	stopdown = false;
+      	stopleft = false;
+      	stopright = false;
 		}else if(circledistancey > (m_size/2 + width)){	
-			m_speed = 1;
+			//m_speed = 1;
+			stopup = false;
+      	stopdown = false;
+      	stopleft = false;
+      	stopright = false;
 		}else if(circledistancex <= (m_size/2)){
-      	m_speed = 0.5;
+      	//m_speed = 0.5;
+      	if(c_up){
+      				//stopup = true;
+      				//stopdown = false;
+      				//stopleft = false;
+      				//stopright = false;
+      				m_y -=4;
+      	}
+      	if(c_right){
+      				//stopright = true;
+      				//stopleft=false;
+      				//stopup=false;
+      				//stopdown=false;
+      				m_x -=4;
+      	}
+      	if(c_down){
+      				//stopdown = true;
+      				//stopup=false;
+      				//stopright=false;
+      				//stopleft=false;
+      				m_y +=4;
+      	}
+      	if(c_left){
+      				//stopleft = true;
+      				//stopright=false;
+      				//stopup=false;
+      				//stopdown=false;
+      				m_x +=4;
+      	}
 		}else if(circledistancey <= (m_size/2)){
-			m_speed = 0.5;
-		}else if(corner <= width){
-			m_speed = 0.5;
+			//m_speed = 0.5;
+			if(c_up){
+      				//stopup = true;
+      				//stopdown = false;
+      				//stopleft = false;
+      				//stopright = false;
+      				m_y -=4;
+      	}
+      	if(c_right){
+      				//stopright = true;
+      				//stopleft=false;
+      				//stopup=false;
+      				//stopdown=false;
+      				m_x -=4;
+      	}
+      	if(c_down){
+      				//stopdown = true;
+      				//stopup=false;
+      				//stopright=false;
+      				//stopleft=false;
+      				m_y +=4;
+      	}
+      	if(c_left){
+      				//stopleft = true;
+      				//stopright=false;
+      				//stopup=false;
+      				//stopdown=false;
+      				m_x +=4;
+      		}
+		//}else if(corner <= width + sqrt(pow(m_size/2,2)+pow(m_size/2,2))){
+		}else if(corner <=pow(width,2)){
+			//m_speed = 0.5;
+      	if(c_up){
+      				//stopup = true;
+      				//stopdown = false;
+      				//stopleft = false;
+      				//stopright = false;
+      				m_y -=4;
+      	}
+      	if(c_right){
+      				//stopright = true;
+      				//stopleft=false;
+      				//stopup=false;
+      				//stopdown=false;
+      				m_x -=4;
+      	}
+      	if(c_down){
+      				//stopdown = true;
+      				//stopup=false;
+      				//stopright=false;
+      				//stopleft=false;
+      				m_y +=4;
+      	}
+      	if(c_left){
+      				//stopleft = true;
+      				//stopright=false;
+      				//stopup=false;
+      				//stopdown=false;
+      				m_x +=4;
+      	}
 		}
      
      
@@ -273,6 +367,10 @@ void Car::init()
 
 Car::Car(int x, int y)
 {
+	c_up=false;
+	c_down=false;
+	c_left=false;
+	c_right=false;
    m_x=x;
    m_y=y;
    m_direction = 2;

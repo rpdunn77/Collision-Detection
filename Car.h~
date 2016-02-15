@@ -15,13 +15,13 @@ class Car {
     int m_arraypos;
     float m_speed;
     
-    //bool stopup,stopdown,stopright,stopleft;
+    bool stopup,stopdown,stopright,stopleft;
 
     GLuint m_carTexture;   
 
    public:
+    bool moveup, moveleft, movedown, moveright;
     void left ();
-    bool stopup,stopdown,stopright,stopleft;
     void right ();
     void up ();
     void down ();

@@ -20,6 +20,7 @@ class Car {
     GLuint m_carTexture;   
 
    public:
+    bool c_up, c_left, c_down, c_right;
     void left ();
     void right ();
     void up ();
