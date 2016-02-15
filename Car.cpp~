@@ -30,7 +30,7 @@ void Car::left ()
 	      	m_x = 968 ;
       	}
    	}else{
-	   	m_x -= 4*m_speed;//50
+	   	m_x -= 6*m_speed;//50
    	}
    }
    m_direction = 3;
@@ -54,7 +54,7 @@ void Car::right ()
 	      	m_x = 5;
       	}
    	}else{
-			m_x += 4*m_speed;
+			m_x += 6*m_speed;
    	}
    }
    m_direction = 1;
@@ -78,7 +78,7 @@ void Car::up ()
 	      	m_y = 5;
      		}
   		}else{
-			m_y +=4*m_speed;
+			m_y +=6*m_speed;
 		}
    }
    m_direction = 0;
@@ -102,7 +102,7 @@ void Car::down ()
 	      	m_y = 676;
       	}
    	}else{
-			m_y -= 4 * m_speed;
+			m_y -= 6 * m_speed;
   		}
    }
    m_direction = 2;
@@ -154,16 +154,16 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond,int qua
 	if(quadrant == quad && height > 0){
       if(m_x+5+m_size > xpos && m_x < xpos + width && m_y+m_size > ypos && m_y < ypos+height){
          stopright = true;
-         m_x -=4;
+         m_x -=6;
       }else if(m_x+m_size > xpos && m_x-5 < xpos + width && m_y+m_size > ypos && m_y < ypos+height){
          stopleft = true;
-         m_x+=4;
+         m_x+=6;
       }else if(m_y-5 < ypos+height  && m_y > ypos && m_x +m_size > xpos && m_x < xpos+width){
          stopdown = true;
-         m_y+=4;
+         m_y+=6;
       }else if(m_y+m_size+5> ypos && m_y < ypos+height && m_x+m_size > xpos && m_x < xpos+width){
          stopup = true;
-         m_y-=4;
+         m_y-=6;
       }else{
          stopright = false;
          stopleft = false;
