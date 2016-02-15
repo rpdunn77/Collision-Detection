@@ -4,6 +4,7 @@ OBJ = Game.cpp \
       Car.cpp \
       ImageLoader.cpp \
       Jukebox.cpp \
+		Obstacle.cpp
       
 All: $(OBJ)
 	$(CC) $(OBJ)  $(LDLIBS) -o game

@@ -128,15 +128,15 @@ void Car::displayTexture ()
    glFlush();
 
 }
-void Car::update (GameObject *obstical,int size)
+void Car::update (Obstacle *ob[],int size)
 {
    
    for(int i=0;i<size;i++){
-      int xpos = obstical->getX();
-      int ypos = obstical->getY();
-      int width = obstical->getW();
-      int height = obstical->getH();
-      int cond = obstical->getC();
+      int xpos = ob[i]->getX();
+      int ypos = ob[i]->getY();
+      int width = ob[i]->getW();
+      int height = ob[i]->getH();
+      int cond = ob[i]->getC();
 
       collisions(xpos, ypos, width, height, cond); 
    }
@@ -145,16 +145,16 @@ void Car::update (GameObject *obstical,int size)
 void Car::collisions(int xpos, int ypos, int width, int height, int cond)
 {
    int quadrant = Game::getInstance().getArrayPos();
-/*
+
    if(quadrant == 4){
-      if(m_x+5 > xpos && m_x < xpos + width && m_y < ypos && m_y > ypos - height){
+      if(m_x+5+m_size > xpos && m_x < xpos + width && m_y+m_size > ypos && m_y < ypos+height){
          stopright = true;
-      }else if(m_x > xpos && m_x-5 < xpos + width && m_y < ypos && m_y > ypos - height){
+      }else if(m_x+m_size > xpos && m_x-5 < xpos + width && m_y+m_size > ypos && m_y < ypos+height){
          stopleft = true;
-      }else if(m_y+5 > ypos -height && m_y < ypos && m_x > xpos && m_x < xpos+width){
-         stopup = true;
-      }else if(m_y > ypos - height && m_y-5 < ypos && m_x > xpos && m_x < xpos+width){
+      }else if(m_y-5 < ypos+height  && m_y > ypos && m_x +m_size > xpos && m_x < xpos+width){
          stopdown = true;
+      }else if(m_y+m_size+5> ypos && m_y < ypos+height && m_x+m_size > xpos && m_x < xpos+width){
+         stopup = true;
       }else{
          stopright = false;
          stopleft = false;
@@ -162,10 +162,10 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond)
          stopdown = false;
       }
 
-*/
+
 
    }
-
+/*
    if(quadrant == 4){
       if(m_x > 115 &&m_x <140 && m_y >155 && m_y <357){
          stopright = true;
@@ -182,14 +182,14 @@ void Car::collisions(int xpos, int ypos, int width, int height, int cond)
          stopdown = false;
       }
       
-      
+      */
 
 
       //if(m_x < 250 && m_x > 245&& m_y > 220 && m_y <320){
         // stopleft = true;
          //stopright = true;
       //}
-   }
+  // }
    if(quadrant == 3){
       
 
@@ -208,6 +208,7 @@ Car::Car(int x, int y)
    m_y=y;
    m_direction = 0; // 1.5 up 3 left 4.5 down
    m_speed = 1;
+   m_size = 48;
    stopright=false;
    stopleft=false;
    stopup=false;

@@ -10,8 +10,10 @@
 
 #include "Car.h"
 
+
 class Car;
 class ImageLoader;
+class Obstacle;
 
 #define MAX_OBJECTS 50
 
@@ -52,7 +54,11 @@ class Game {
       int m_margine;
 
       int m_arraypos;
+      int m_gameObjects;
       GLuint m_backgroundTexture;
+      Obstacle *m_myGameObjects3[10];
+
+      Obstacle *m_myGameObjects4[10];
 	  GLuint m_splashTexture;
       
       // Items in the game

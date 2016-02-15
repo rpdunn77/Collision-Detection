@@ -197,7 +197,8 @@ void Game::update()
       return splashScreen();
    }
 
-   m_myCar.update();
+
+   m_myCar.update(m_myGameObjects3,1);
    m_myCar.display();
 }
 
@@ -234,10 +235,10 @@ void Game::init() {
     glLoadIdentity();
 
 
-    m_gameObjects = 10;                            //x   y   len  bre
-    m_myGameObjects[m_gameObjects] = new Obstacles(174, 372, 147, 150); //square
-                                                    //x   y    r     n   s    e
-    m_myGameObjects[m_gameObjects] = new Obstacles;(730, 140, 8.5 , 8.5, 0 , 8.5 );  
+    m_gameObjects = 0;                            //x   y   len  bre
+    m_myGameObjects3[m_gameObjects] = new Obstacle(170, 210, 154 , 150, 0); //square
+                                                    //x   y    r   circleflag  cond
+    m_myGameObjects4[m_gameObjects] = new Obstacle(730, 140, 8.5 , 0, 1 );  
 
     
 

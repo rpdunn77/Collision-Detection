@@ -20,6 +20,8 @@
 #define OBSTACLE_H_
 
 #include "GameObject.h"
+#include "Car.h"
+class Car;
 
 class Obstacle: public GameObject {
 
@@ -30,15 +32,16 @@ private:
 public:
 	int getX() {return m_x;};
     int getY() {return m_y;};
-    int getW() {return m_width};
-    int getH() {return m_height};
-    int getC() {return m_cond};
+    int getW() {return m_width;};
+    int getH() {return m_height;};
+    int getC() {return m_cond;};
 	
-	void update ();
-	void display ();
-	void collide (Character *C);
+	void update (){};
+	void display (){};
+	bool collide (Car *C){};
 	Obstacle(int x, int y, int w, int h, int c);
+   Obstacle(){};
 	
 };
 
-#endif OBSTACLE_H_
+#endif /*OBSTACLE_H_*/
