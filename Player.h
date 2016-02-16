@@ -26,7 +26,6 @@ class Player {
     void up ();
     void down ();
     void attack ();
-    void honk ();
     void display ();
     void displayTexture ();
     void update (Obstacle *obstacle[],int size, int quad);

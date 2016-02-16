@@ -21,9 +21,9 @@ void Player::left ()
    	{
       	if(Game::getInstance().getArrayPos() != 3 && Game::getInstance().getArrayPos() != 1){
       		m_arraypos -= 1;
-         	Game::getInstance().changeScreen(m_arraypos);
-         	Game::getInstance().setArrayPos(m_arraypos);
-	      	m_x = 968 ;
+         	Game::getInstance().changeScreen(m_arraypos);//change screen picture
+         	Game::getInstance().setArrayPos(m_arraypos);//set new arraypos
+	      	m_x = 968 ;//set x pos to other side of screen
       	}
    	}else{
 	   	m_x -= 4*m_speed;
@@ -94,11 +94,7 @@ void Player::down ()
 }
 void Player::attack ()
 {
-  Game::getInstance().changeScreen(1);
-}
-void Player::honk ()
-{
-  Jukebox::PlaySound("./sounds/AHH.WAV");
+	//will be used for final
 }
 
 void Player::display ()
@@ -136,36 +132,100 @@ void Player::collisions(int xpos, int ypos, int width, int height, int cond,int 
 {
 	int quadrant = Game::getInstance().getArrayPos();
 	if(quadrant == quad && height > 0){
+      //********************** TODO 1 **********************//
+      //******* Implement up, down, left stoping     *******//
+      //******* HINTS:                               *******//
+      //*******      xpos & ypos start bottom right  *******//
+      //*******      of the rectangles, these values *******//
+      //*******      are already coded in.           *******//
+      //*******                                      *******//
+      //*******      for +5 in the below "m_x+5"     *******//
+      //*******      the +5 is used to determine     *******//
+      //*******      if the next movement in that    *******//
+      //*******      direction will be a collision   *******//
+      //*******      if so, stop%direction% = true   *******//
+      //******* WHY:                                 *******//
+      //*******  	   This method is using a similar  *******//
+      //*******  		method as Dr. J's to check if   *******//
+      //*******  		the two boxes are colliding     *******//
+      //****************************************************//
       if(m_x+5+m_size > xpos && m_x < xpos + width && m_y+m_size > ypos && m_y < ypos+height){
-         stopright = true;
-         m_x -=4;
-      }else if(m_x+m_size > xpos && m_x-5 < xpos + width && m_y+m_size > ypos && m_y < ypos+height){
-         stopleft = true;
-         m_x+=4;
-      }else if(m_y-5 < ypos+height  && m_y > ypos && m_x +m_size > xpos && m_x < xpos+width){
-         stopdown = true;
-         m_y+=4;
-      }else if(m_y+m_size+5> ypos && m_y < ypos+height && m_x+m_size > xpos && m_x < xpos+width){
-         stopup = true;
-         m_y-=4;
-      }else{
-         stopright = false;
-         stopleft = false;
-         stopup = false;
-         stopdown = false;
-      }
+         stopright = true; //determines whether or not player can move right
+         m_x-=4;           //this fixes clipping issues when moving diagonal
+		}/*start code task 1*/		
+		
+				
+				/*Your Code Here*/
+
+
+		/*end code task 1*/
+		else{//not at any collision point
+			stopright = false;
+			stopleft = false;
+			stopup = false;
+			stopdown = false;
+		}
+	//the if height == 0 means that this is a circle
+	//and width should be used as radius
 	}else if(quadrant == quad && height == 0){
-		float circledistancex = abs(xpos - (m_x + (m_size/2)));
-		float circledistancey = abs(ypos - (m_y + (m_size/2)));
-		float corner = pow((circledistancex - m_size/2),2) +
-							pow((circledistancey - m_size/2),2);
-		if(circledistancex > (m_size/2 + width)){	
-			//m_speed = 1;
-		}else if(circledistancey > (m_size/2 + width)){	
-			//m_speed = 1;
-		}else if(circledistancex <= (m_size/2)){
-      	//m_speed = 0.5;
-      	if(c_up){
+      //********************** TODO 3 **********************//
+      //******* Decrease the speed of the player     *******//
+      //******* when colliding with the lake(circle) *******//
+      //******* by half. 								     *******//
+      //*******                                      *******//
+      //******* HINT:  										  *******//
+      //*******  	There is a speed variable that is  *******//
+      //*******  	multiplied by the distance moved	  *******//
+      //*******  	when player is travelling in the   *******//
+      //*******  	proper directions. 					  *******//
+      //*******  												  *******//
+      //******* WHY:											  *******//
+      //*******  	Collision detection does not only  *******//
+      //*******  	include the stopping of a player.  *******//
+      //*******  	In this case, it can simulate 	  *******//
+      //*******  	travelling through a shallow lake. *******//
+      //****************************************************//
+
+		//****************************************************//      
+      //*******    The logic and code for Circle     *******//
+      //*******    was found here:						  *******//
+      //******* http://stackoverflow.com/questions/401847/circle-rectangle-collision-detection-intersection 										  *******//
+      //*******	UserName: e.James                  *******//
+      //*******   This code was slightly modified to *******//
+      //*******   suit the needs of this Lab         *******//
+      //****************************************************//
+      
+      
+      
+		float circleDistanceX = abs(xpos - (m_x + (m_size/2)));
+		float circleDistanceY = abs(ypos - (m_y + (m_size/2)));
+		float corner = pow((circleDistanceX - m_size/2),2) +
+							pow((circleDistanceY - m_size/2),2);
+		if(circleDistanceX > (m_size/2 + width)){	//did not collide
+			m_speed = 1;
+		}else if(circleDistanceY > (m_size/2 + width)){	//did not collide
+			m_speed = 1;
+		}else if(circleDistanceX <= (m_size/2)){ //collided
+		
+		
+		
+		
+		//***************EXTRA CODE TO PLAY WITH**************//
+		//*******  This is some extra code you can use *******//
+		//*******  to test your circle collision with  *******//
+		//*******  stopping. Sometimes it is difficult *******//
+		//*******  to determine if objects are         *******//
+		//*******  accurately colliding with only slow *******//
+		//*******  movement.  								  *******//
+		//*******  												  *******//
+		//*******  You can also use this as a guide to *******//
+		//*******  see a seperate method of making     *******//
+		//*******  your sprite stop.						  *******//
+		//*******  Place in all places that use collide*******//
+		//*******  for the circle. 						  *******//
+		//****************************************************//
+		
+		   /*if(c_up){
       		m_y -=4;
       	}
       	if(c_right){
@@ -176,35 +236,47 @@ void Player::collisions(int xpos, int ypos, int width, int height, int cond,int 
       	}
       	if(c_left){
       		m_x +=4;
-      	}
-		}else if(circledistancey <= (m_size/2)){
-			//m_speed = 0.5;
-			if(c_up){
-      		m_y -=4;
-      	}
-      	if(c_right){
-      		m_x -=4;
-      	}
-      	if(c_down){
-      		m_y +=4;
-      	}
-      	if(c_left){
-      		m_x +=4;
-      	}
-		}else if(corner <=pow(width,2)){
-			//m_speed = 0.5;
-      	if(c_up){
-      		m_y -=4;
-      	}
-      	if(c_right){
-      		m_x -=4;
-      	}
-      	if(c_down){
-      		m_y +=4;
-      	}
-      	if(c_left){
-      		m_x +=4;
-      	}
+      	}*/
+		
+		//********************** TODO 2 **********************//
+      //*******  Using the above example: 			  *******//
+      //*******  	 if(circleDistanceX <= (m_size/2)) *******//
+      //*******  write the equivalent code using     *******//
+      //*******  circleDistanceY.                    *******//
+      //*******  Then using the corner variable      *******//
+      //*******  compare the point on the circle     *******//
+      //*******  that the corner of the square will  *******//
+      //*******  collid with.                        *******//
+      //*******  												  *******//
+      //*******  HINT:									  	  *******//
+      //*******     corner is defined above using    *******//
+      //*******     the pythagorean theorem  to find *******//
+      //*******     the point on the circle that the *******//
+      //*******  	  square collides with.            *******//
+      //*******                                      *******//
+      //*******     Radius is defined as width       *******//
+      //*******     this is so we could reuse the    *******//
+      //*******     same parameters without creating *******//
+      //*******     another version of Obsticle class*******//
+      //*******                                      *******//
+      //*******     corner was not squarerooted at   *******//
+      //*******     the end in order to run faster,  *******//
+      //*******     use your comparison ^2 instead.  *******//
+      //*******  												  *******//
+      //*******  WHY:                                *******//
+      //*******  First is checking if the y distance *******//
+      //*******  from center of the circle is in the *******//
+      //*******  square.                             *******//
+      //*******  Second is checking if the distance  *******//
+      //*******  from one of the corners of the      *******//
+      //*******  square is colliding with the circle *******//
+      //*******  												  *******//
+      //****************************************************//
+      }else if(1/*Your code here task 2 part 1*/){//collided
+      	/*Your code here task 3*/
+		
+		}else if(1/*Your code here task 2 part 2*/){//collided
+			/*Your code here task 3*/
 		}
 	}
 }
