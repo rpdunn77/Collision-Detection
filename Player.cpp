@@ -135,7 +135,7 @@ void Player::collisions(int xpos, int ypos, int width, int height, int cond,int 
       //********************** TODO 1 **********************//
       //******* Implement up, down, left stoping     *******//
       //******* HINTS:                               *******//
-      //*******      xpos & ypos start bottom right  *******//
+      //*******      xpos & ypos start bottom left   *******//
       //*******      of the rectangles, these values *******//
       //*******      are already coded in.           *******//
       //*******                                      *******//
